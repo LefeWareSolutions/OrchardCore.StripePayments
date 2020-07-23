@@ -1,11 +1,11 @@
 # OrchardCore.StripePayment
 An Orchard Core module for making one time and reoccuring payments using Stripe.
 
-##OrchardCore.StripePayment Feature
+## OrchardCore.StripePayment Feature
 The Stripe Payment feature is used for one time payments. It has a strong dependency on the following module:
 - [Orchard.Payments](https://github.com/LefeWareSolutions/OrchardCore.Payments)
 
-##OrchardCore.StripeSubscription Feature
+## OrchardCore.StripeSubscription Feature
 The Stripe Subscription feature is used for monthly reoccuring payments. It uses Stripe Webhooks to accomplish this
 - This feature is not ready for consumption
 
