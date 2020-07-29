@@ -1,0 +1,8 @@
+{
+  "TextField": [
+    {
+      "place": "-",
+      "contentPart": [ "StripePaymentFormPart" ]
+    }
+  ]
+}

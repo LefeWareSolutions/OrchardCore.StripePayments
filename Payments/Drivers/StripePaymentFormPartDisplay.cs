@@ -3,6 +3,7 @@ using GraphQL;
 using LefeWareLearning.StripePayment;
 using LefeWareSolutions.Payments.Models;
 using Microsoft.Extensions.Options;
+using OrchardCore.ContentManagement;
 using OrchardCore.ContentManagement.Display.ContentDisplay;
 using OrchardCore.ContentManagement.Display.Models;
 using OrchardCore.DisplayManagement.Views;
@@ -24,7 +25,7 @@ namespace OrchardCore.StripePayment
 
         public override async Task<IDisplayResult> DisplayAsync(StripePaymentFormPart stripePaymentFormPart, BuildPartDisplayContext context)
         {
-            var paymentPart = stripePaymentFormPart.ContentItem.ContentItem.As<PaymentPart>();
+            var paymentPart = stripePaymentFormPart.ContentItem.Get<PaymentPart>("PaymentPart");
             var cost = (long)paymentPart.Cost;
             var currency = paymentPart.Currency.Text;
             var paymentIntent = await _stripePaymentService.CreatePaymentIntent(cost, currency);
