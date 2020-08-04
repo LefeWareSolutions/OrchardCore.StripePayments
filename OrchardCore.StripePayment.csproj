@@ -30,4 +30,12 @@
     <ProjectReference Include="..\OrchardCore.Payments\OrchardCore.Payments.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Scripts\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Payments\Assets\stripe-payment.js" />
+  </ItemGroup>
+
 </Project>
