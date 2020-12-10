@@ -26,11 +26,13 @@ namespace OrchardCore.StripePayment
             );
 
             _contentDefinitionManager.AlterTypeDefinition("StripePaymentForm", builder => builder
+                .Creatable()
                 .Draftable()
                 .Versionable()
                 .Listable()
-                .WithPart("PaymentPart", part => part.WithPosition("1"))
-                .WithPart("StripePaymentFormPart", part => part.WithPosition("2"))
+                .WithPart("TitlePart", part => part.WithPosition("1"))
+                .WithPart("PaymentPart", part => part.WithPosition("2"))
+                .WithPart("StripePaymentFormPart", part => part.WithPosition("3"))
             );
 
             return 1;
