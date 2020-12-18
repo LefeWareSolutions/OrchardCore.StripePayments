@@ -62,7 +62,7 @@ namespace LefeWareLearning.StripePayment
             return View();
         }
 
-        public async Task<IActionResult> PaymentSuccess(string sessionId)
+        public IActionResult PaymentSuccess(string sessionId)
         {
             return View();
         }

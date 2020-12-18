@@ -16,7 +16,7 @@ namespace OrchardCore.StripePayment.Services
             _stripeConfig = stripeConfig.Value;
         }
 
-        public async Task<PaymentIntent> CreatePaymentIntent(long cost, string currency)
+        public Task<PaymentIntent> CreatePaymentIntent(long cost, string currency)
         {
             StripeConfiguration.ApiKey = _stripeConfig.StripeAPIKey;
 
@@ -33,7 +33,7 @@ namespace OrchardCore.StripePayment.Services
             var service = new PaymentIntentService();
             var paymentIntent = service.Create(options);
 
-            return paymentIntent;
+            return Task.FromResult<PaymentIntent>(paymentIntent);
         }
     }
 }
