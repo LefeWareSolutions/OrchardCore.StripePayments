@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OrchardCore.ContentFields.Settings;
 using OrchardCore.ContentManagement.Metadata;
 using OrchardCore.ContentManagement.Metadata.Settings;
 using OrchardCore.Data.Migration;
@@ -23,15 +24,14 @@ namespace OrchardCore.StripePayment
             _contentDefinitionManager.AlterPartDefinition("StripePaymentFormPart", builder => builder
                 .Attachable()
                 .WithDescription("Provides the template needed to dispaly a stripe payment form.")
+                .WithField("StripeAPIKey", f => f
+                    .OfType("TextField")
+                    .WithSettings(new TextFieldSettings() { Required = true, Hint = "Enter your stripe API key"})
+                    .WithDisplayName("Stripe API Key")
+                )
             );
 
-            _contentDefinitionManager.AlterTypeDefinition("StripePaymentForm", builder => builder
-                .Creatable()
-                .Draftable()
-                .Versionable()
-                .Listable()
-                .WithPart("TitlePart", part => part.WithPosition("1"))
-                .WithPart("PaymentPart", part => part.WithPosition("2"))
+            _contentDefinitionManager.AlterTypeDefinition("PaymentForm", builder => builder
                 .WithPart("StripePaymentFormPart", part => part.WithPosition("3"))
             );
 

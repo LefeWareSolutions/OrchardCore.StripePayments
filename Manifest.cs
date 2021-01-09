@@ -16,7 +16,7 @@ using OrchardCore.Modules.Manifest;
     Description = "Allows users to use stripe as their payment method",
     Dependencies = new[]
     {
-        "LefeWareSolutions.Payments",
+        "OrchardCore.PaymentForm",
     }
 )]
 
