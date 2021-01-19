@@ -9,16 +9,11 @@ namespace OrchardCore.StripePayment.Services
 {
     public class StripePaymentService : IStripePaymentService
     {
-        private readonly StripeConfigurationOptions _stripeConfig;
 
-        public StripePaymentService(IOptions<StripeConfigurationOptions> stripeConfig)
-        {
-            _stripeConfig = stripeConfig.Value;
-        }
 
-        public Task<PaymentIntent> CreatePaymentIntent(long cost, string currency)
+        public Task<PaymentIntent> CreatePaymentIntent(long cost, string currency, string stripeAPIKey)
         {
-            StripeConfiguration.ApiKey = _stripeConfig.StripeAPIKey;
+            StripeConfiguration.ApiKey = stripeAPIKey;
 
             var options = new PaymentIntentCreateOptions
             {

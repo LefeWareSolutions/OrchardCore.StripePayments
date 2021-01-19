@@ -5,6 +5,6 @@ namespace OrchardCore.StripePayment.Services
 {
     public interface IStripePaymentService
     {
-        Task<PaymentIntent> CreatePaymentIntent(long cost, string currency);
+        Task<PaymentIntent> CreatePaymentIntent(long cost, string currency, string stripeAPIKey);
     }
 }

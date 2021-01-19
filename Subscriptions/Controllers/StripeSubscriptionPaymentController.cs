@@ -15,14 +15,12 @@ namespace LefeWareLearning.StripePayment
     public class StripeSubscriptionPaymentController : Controller
     {
         private readonly IAuthorizationService _authorizationService;
-        private readonly StripeConfigurationOptions _options;
         private readonly ShellSettings _shellSettings;
 
 
-        public StripeSubscriptionPaymentController(IAuthorizationService authorizationService, IOptions<StripeConfigurationOptions> options, ShellSettings shellSettings)
+        public StripeSubscriptionPaymentController(IAuthorizationService authorizationService, ShellSettings shellSettings)
         {
             _authorizationService = authorizationService;
-            _options = options.Value;
             _shellSettings = shellSettings;
         }
 
@@ -41,7 +39,7 @@ namespace LefeWareLearning.StripePayment
                 {
                     Items = new List<SessionSubscriptionDataItemOptions>
                     {
-                        new SessionSubscriptionDataItemOptions {Plan = _options.StripePlanKey},
+                        new SessionSubscriptionDataItemOptions {Plan = "StripePlanKey"},
                     },
                     Metadata = new Dictionary<string, string>()
                     {
@@ -58,7 +56,7 @@ namespace LefeWareLearning.StripePayment
             var session = service.Create(options);
 
             ViewBag.SessionId = session.Id;
-            ViewBag.StripePublicKey = _options.StripePublicKey;
+            ViewBag.StripePublicKey = "StripePublicKey";
             return View();
         }
 

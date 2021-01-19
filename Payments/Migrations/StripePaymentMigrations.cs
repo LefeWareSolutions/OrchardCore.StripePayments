@@ -23,15 +23,24 @@ namespace OrchardCore.StripePayment
         {
             _contentDefinitionManager.AlterPartDefinition("StripePaymentFormPart", builder => builder
                 .Attachable()
-                .WithDescription("Provides the template needed to dispaly a stripe payment form.")
-                .WithField("StripeAPIKey", f => f
+                .WithDescription("Provides the template needed to display a stripe payment form.")
+                .WithField("StripePublishableKey", f => f
                     .OfType("TextField")
-                    .WithSettings(new TextFieldSettings() { Required = true, Hint = "Enter your stripe API key"})
+                    .WithSettings(new TextFieldSettings() { Required = true, Hint = "Enter your stripe publishable API key (https://stripe.com/docs/keys)" })
+                    .WithDisplayName("Stripe API Key")
+                )
+                .WithField("StripeSecretKey", f => f
+                    .OfType("TextField")
+                    .WithSettings(new TextFieldSettings() { Required = true, Hint = "Enter your stripe secret API key (https://stripe.com/docs/keys)" })
                     .WithDisplayName("Stripe API Key")
                 )
             );
 
-            _contentDefinitionManager.AlterTypeDefinition("PaymentForm", builder => builder
+            _contentDefinitionManager.AlterTypeDefinition("StripePaymentForm", builder => builder
+                .Creatable()
+                .Listable()
+                .WithPart("TitlePart", part => part.WithPosition("1"))
+                .WithPart("PaymentPart", part => part.WithPosition("2"))
                 .WithPart("StripePaymentFormPart", part => part.WithPosition("3"))
             );
 

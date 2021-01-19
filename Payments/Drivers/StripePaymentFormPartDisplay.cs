@@ -15,11 +15,9 @@ namespace OrchardCore.StripePayment
     public class StripePaymentFormPartDisplay : ContentPartDisplayDriver<StripePaymentFormPart>
     {
         private readonly IStripePaymentService _stripePaymentService;
-        private readonly StripeConfigurationOptions _stripeConfig;
 
-        public StripePaymentFormPartDisplay(IStripePaymentService stripePaymentService, IOptions<StripeConfigurationOptions> stripeConfig)
+        public StripePaymentFormPartDisplay(IStripePaymentService stripePaymentService)
         {
-            _stripeConfig = stripeConfig.Value;
             _stripePaymentService = stripePaymentService;
         }
 
@@ -28,11 +26,11 @@ namespace OrchardCore.StripePayment
             var paymentPart = stripePaymentFormPart.ContentItem.Get<PaymentPart>("PaymentPart");
             var cost = (long)paymentPart.Cost;
             var currency = paymentPart.Currency.Text;
-            var paymentIntent = await _stripePaymentService.CreatePaymentIntent(cost, currency);
+            var paymentIntent = await _stripePaymentService.CreatePaymentIntent(cost, currency, stripePaymentFormPart.StripeSecretKey.Text);
 
             return Initialize<StripePaymentFormPartViewModel>("StripePaymentFormPart", m =>
             {
-                m.PublishableKey = _stripeConfig.StripePublicKey;
+                m.PublishableKey = stripePaymentFormPart.StripePublishableKey.Text;
                 m.IntentClientSecret = paymentIntent.ClientSecret;
             })
             .Location("Detail", "Content:5")

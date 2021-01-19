@@ -20,14 +20,13 @@ namespace LefeWareLearning.StripePayment.Controllers
     [IgnoreAntiforgeryToken, AllowAnonymous]
     public class StripeWebHookController : Controller
     {
+        private const string WebhookSecret = "";
         private readonly ILogger<StripeWebHookController> _logger;
         private readonly IServiceProvider _serviceProvider;
-        private readonly StripeConfigurationOptions _options;
-        public StripeWebHookController(IServiceProvider serviceProvider, ILogger<StripeWebHookController> logger, IOptions<StripeConfigurationOptions> options)
+        public StripeWebHookController(IServiceProvider serviceProvider, ILogger<StripeWebHookController> logger)
         {
             _serviceProvider = serviceProvider;
             _logger = logger;
-            _options = options.Value;
         }
 
         [HttpPost]
@@ -43,7 +42,7 @@ namespace LefeWareLearning.StripePayment.Controllers
 
             try
             {
-                var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"], _options.WebhookSecret, throwOnApiVersionMismatch: false);
+                var stripeEvent = EventUtility.ConstructEvent(json, Request.Headers["Stripe-Signature"], WebhookSecret, throwOnApiVersionMismatch: false);
 
                 switch (stripeEvent.Type)
                 {

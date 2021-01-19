@@ -17,22 +17,14 @@ namespace OrchardCore.StripePayment
 {
     public class Startup : StartupBase
     {
-        private readonly IConfiguration _configuration;
-
-        public Startup(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
         public override void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IPermissionProvider, Permissions>();
-            services.Configure<StripeConfigurationOptions>(_configuration.GetSection("Stripe"));
         }
 
         public override void Configure(IApplicationBuilder app, IEndpointRouteBuilder routes, IServiceProvider serviceProvider)
         {
-            StripeConfiguration.ApiKey = _configuration["Stripe:StripeAPIKey"];
+            
         }
     }
 
