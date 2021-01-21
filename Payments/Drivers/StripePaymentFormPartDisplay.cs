@@ -19,12 +19,12 @@ namespace OrchardCore.StripePayment
         public StripePaymentFormPartDisplay(IStripePaymentService stripePaymentService)
         {
             _stripePaymentService = stripePaymentService;
-        }
+    }
 
         public override async Task<IDisplayResult> DisplayAsync(StripePaymentFormPart stripePaymentFormPart, BuildPartDisplayContext context)
         {
             var paymentPart = stripePaymentFormPart.ContentItem.Get<PaymentPart>("PaymentPart");
-            var cost = (long)paymentPart.Cost;
+            var cost = (long)(paymentPart.Cost * 100);
             var currency = paymentPart.Currency.Text;
             var paymentIntent = await _stripePaymentService.CreatePaymentIntent(cost, currency, stripePaymentFormPart.StripeSecretKey.Text);
 

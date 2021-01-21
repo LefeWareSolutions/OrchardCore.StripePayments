@@ -27,12 +27,12 @@ namespace OrchardCore.StripePayment
                 .WithField("StripePublishableKey", f => f
                     .OfType("TextField")
                     .WithSettings(new TextFieldSettings() { Required = true, Hint = "Enter your stripe publishable API key (https://stripe.com/docs/keys)" })
-                    .WithDisplayName("Stripe API Key")
+                    .WithDisplayName("Stripe Publishable Key")
                 )
                 .WithField("StripeSecretKey", f => f
                     .OfType("TextField")
                     .WithSettings(new TextFieldSettings() { Required = true, Hint = "Enter your stripe secret API key (https://stripe.com/docs/keys)" })
-                    .WithDisplayName("Stripe API Key")
+                    .WithDisplayName("Stripe Secret Key")
                 )
             );
 

@@ -1,0 +1,8 @@
+@using OrchardCore.ContentManagement;
+@{
+    ContentItem contentItem = Model.ContentItem;
+}
+<div class="jumbotron">
+    <h1>Payment Form</h1>
+    @await DisplayAsync(Model.Content)
+</div>
