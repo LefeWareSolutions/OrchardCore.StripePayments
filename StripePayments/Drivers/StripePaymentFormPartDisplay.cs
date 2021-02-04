@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using GraphQL;
 using LefeWareLearning.StripePayment;
@@ -19,14 +20,14 @@ namespace OrchardCore.StripePayment
         public StripePaymentFormPartDisplay(IStripePaymentService stripePaymentService)
         {
             _stripePaymentService = stripePaymentService;
-    }
+        }
 
         public override async Task<IDisplayResult> DisplayAsync(StripePaymentFormPart stripePaymentFormPart, BuildPartDisplayContext context)
         {
             var paymentPart = stripePaymentFormPart.ContentItem.Get<PaymentPart>("PaymentPart");
             var cost = (long)(paymentPart.Cost * 100);
             var currency = paymentPart.Currency.Text;
-            var paymentIntent = await _stripePaymentService.CreatePaymentIntent(cost, currency, stripePaymentFormPart.StripeSecretKey.Text);
+            var paymentIntent = await _stripePaymentService.CreatePaymentIntent(stripePaymentFormPart.StripeSecretKey.Text, cost, currency, new Dictionary<string, string>());
 
             return Initialize<StripePaymentFormPartViewModel>("StripePaymentFormPart", m =>
             {

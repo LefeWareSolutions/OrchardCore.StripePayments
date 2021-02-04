@@ -9,6 +9,6 @@ namespace OrchardCore.StripePayment.ViewModels
     public class StripePaymentFormPartViewModel
     {
         public string IntentClientSecret { get; set; }
-        public string PublishableKey { get; internal set; }
+        public string PublishableKey { get;  set; }
     }
 }

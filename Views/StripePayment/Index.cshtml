@@ -1,0 +1,8 @@
+@model OrchardCore.StripePayment.StripePayments.ViewModels.StripePaymentFormViewModel;
+
+<input type="hidden" value="@Model.PaymentIntentClientSecret" id="paymentIntentClientSecret" />
+<input type="hidden" value="@Model.StripePublishableAPIKey" id="tripePublishableAPIKey" />
+<div class="jumbotron">
+    <h1>Payment Form</h1>
+    @await DisplayAsync(@Model.Shape)
+</div>

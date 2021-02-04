@@ -63,8 +63,8 @@ namespace LefeWareLearning.StripePayment.Controllers
                         //Payment Method
                         var paymentMethod = await GetPaymentInformation(invoice);
 
-                        var paymentSuccessEventHandlers = _serviceProvider.GetRequiredService<IEnumerable<IPaymentSuccessEventHandler>>();
-                        await paymentSuccessEventHandlers.InvokeAsync(x => x.PaymentSuccess(tenantId, tenantName, period, amount, paymentMethod, planName), _logger);
+                        var paymentSuccessEventHandlers = _serviceProvider.GetRequiredService<IEnumerable<ISubscriptionPaymentSuccessEventHandler>>();
+                        await paymentSuccessEventHandlers.InvokeAsync(x => x.SubscriptionPaymentSuccess(tenantId, tenantName, period, amount, paymentMethod, planName), _logger);
                         break;
                     }
                     case Events.InvoicePaymentFailed:
@@ -83,8 +83,8 @@ namespace LefeWareLearning.StripePayment.Controllers
 
                         _logger.LogInformation($"Incoming Invoice PaymentFailedEvent for tenant {tenantName} for {planName} plan for period of {period.Start} to {period.End}");
 
-                        var paymentFailedEventHandlers = _serviceProvider.GetRequiredService<IEnumerable<IPaymentFailedEventHandler>>();
-                        await paymentFailedEventHandlers.InvokeAsync(x => x.PaymentFailed(tenantId, tenantName, period, paymentMethod, planName), _logger);
+                        var paymentFailedEventHandlers = _serviceProvider.GetRequiredService<IEnumerable<ISubscriptionPaymentFailedEventHandler>>();
+                        await paymentFailedEventHandlers.InvokeAsync(x => x.SubscriptionPaymentFailed(tenantId, tenantName, period, paymentMethod, planName), _logger);
                         break;
                     }
                 }

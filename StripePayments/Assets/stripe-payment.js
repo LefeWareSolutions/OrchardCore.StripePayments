@@ -23,7 +23,7 @@ card.mount("#card-element");
 //});
 
 //Submit the payment to stripe
-var form = document.getElementsByClassName('form-camp-registration-form')[0];
+var form = document.getElementById('payment-form');
 form.addEventListener('submit', function (ev) {
     ev.preventDefault();
     changeLoadingState(true);
@@ -32,6 +32,7 @@ form.addEventListener('submit', function (ev) {
     stripe.confirmCardPayment(intentClientSecret, {
         payment_method: {
             card: card,
+            type: 'card',
             billing_details: {
                 name: `${billingName} ${billingLastName}`
             }
@@ -42,11 +43,25 @@ form.addEventListener('submit', function (ev) {
         } else {
             // The payment has been processed!
             if (result.paymentIntent.status === 'succeeded') {
-                // Show a success message to your customer
-                // There's a risk of the customer closing the window before callback
-                // execution. Set up a webhook or plugin to listen for the
-                // payment_intent.succeeded event that handles any business critical
-                // post-payment actions.
+                // TODO: There's a risk of the customer closing the window before callback execution. 
+                // Set up a webhook to listen for the payment_intent.succeeded event
+                const url = window.location.href;
+                let baseUrl = url.split('StripePayment')
+                baseUrl = baseUrl.[0];
+                let baseUrl = `${}/StripePayment/PaymentIntentSuccess`;
+                const request = {
+                    headers: {
+
+                    },
+                    body: result.paymentIntent,
+                    method: "POST"
+                };
+
+                fetch(baseUrl, request).then(x => {
+
+                }).catch(error=>console.log(error))
+            } else {
+                showError("Error with payment processing")
             }
         }
     });

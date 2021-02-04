@@ -11,18 +11,16 @@ namespace OrchardCore.StripePayment.Services
     {
 
 
-        public Task<PaymentIntent> CreatePaymentIntent(long cost, string currency, string stripeAPIKey)
+        public Task<PaymentIntent> CreatePaymentIntent(string stripeSecretKey, long cost, string currency, Dictionary<string, string> metadata)
         {
-            StripeConfiguration.ApiKey = stripeAPIKey;
+            StripeConfiguration.ApiKey = stripeSecretKey;
 
             var options = new PaymentIntentCreateOptions
             {
                 Amount = cost,
                 Currency = currency,
-                Metadata = new Dictionary<string, string>
-                {
-                  { "test", "test123" },
-                },
+                PaymentMethodTypes = new List<string>(){"card"},
+                Metadata = metadata
             };
 
             var service = new PaymentIntentService();
