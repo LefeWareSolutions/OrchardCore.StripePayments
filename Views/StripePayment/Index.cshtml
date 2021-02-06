@@ -2,7 +2,6 @@
 
 <input type="hidden" value="@Model.PaymentIntentClientSecret" id="paymentIntentClientSecret" />
 <input type="hidden" value="@Model.StripePublishableAPIKey" id="tripePublishableAPIKey" />
-<div class="jumbotron">
-    <h1>Payment Form</h1>
+<div>
     @await DisplayAsync(@Model.Shape)
 </div>

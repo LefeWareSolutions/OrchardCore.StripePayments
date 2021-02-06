@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Razor">
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -12,10 +12,6 @@
     <Description>A Module for Stripe Payment</Description>
     <IsPackable>true</IsPackable>
   </PropertyGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Remove="wwwroot\Scripts\stripe-payment.js" />
-  </ItemGroup>
   
   <ItemGroup>
     <FrameworkReference Include="Microsoft.AspNetCore.App" />
@@ -35,10 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="StripePayments\Assets\stripe-payment.js" />
-    <None Include="wwwroot\Scripts\stripe-payment.js">
-      <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-    </None>
+    <Folder Include="wwwroot\Scripts\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Payments\Assets\stripe-payment.js" />
+  </ItemGroup>
+
 
 </Project>

@@ -74,7 +74,7 @@ namespace OrchardCore.StripePayment.Controllers
 
 
 
-        [HttpPost]
+        [HttpPost, IgnoreAntiforgeryToken]
         public async Task<IActionResult> PaymentIntentSuccess(PaymentIntent paymentIntent)
         {
             //TODO: This should be a webhook, but multi tenancy brings on challenges
@@ -83,7 +83,6 @@ namespace OrchardCore.StripePayment.Controllers
 
             return Ok();
         }
-
 
     }
 }

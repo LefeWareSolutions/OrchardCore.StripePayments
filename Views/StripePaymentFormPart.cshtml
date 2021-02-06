@@ -3,34 +3,34 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 
-    <form id="payment-form">
+<form id="payment-form">
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName" placeholder="First name">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="lastName">LastName</label>
-                <input type="text" class="form-control" id="lastName" placeholder="Last name">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="firstName">First Name</label>
+            <input type="text" class="form-control" id="firstName" placeholder="First name">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="lastName">LastName</label>
+            <input type="text" class="form-control" id="lastName" placeholder="Last name">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="card-element">Credit Card</label>
+            <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'>
+                <div id="card-errors" role="alert"></div>
             </div>
         </div>
+    </div>
 
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="card-element">Credit Card</label>
-                <div id="card-element" class="form-control" style='height: 2.4em; padding-top: .7em;'>
-                    <div id="card-errors" role="alert"></div>
-                </div>
-            </div>
-        </div>
+    <div class="spinner hidden" id="spinner"></div>
+    <input type="hidden" value="@Model.IntentClientSecret" id="intentClientSecret" />
+    <input type="hidden" value="@Model.PublishableKey" id="publishableKey" />
 
-        <div class="spinner hidden" id="spinner"></div>
-        <input type="hidden" value="@Model.IntentClientSecret" id="intentClientSecret" />
-        <input type="hidden" value="@Model.PublishableKey" id="publishableKey" />
-
-        <button id="submit" class="btn btn-primary">Pay</button>
-    </form>
+    <button id="submit" class="btn btn-primary">Pay</button>
+</form>
 
 
 <script src="~/OrchardCore.StripePayment/Scripts/stripe-payment.js"></script>

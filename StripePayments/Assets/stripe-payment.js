@@ -36,7 +36,11 @@ form.addEventListener('submit', function (ev) {
             billing_details: {
                 name: `${billingName} ${billingLastName}`
             }
-        }
+        },
+        metadata: {
+            stripePaymentFormId: "485p3amrvm02p24mzz07y0rddm",
+            camperId: "47d7n3n3sbt8yyczf8c00g3hmf"
+        },
     }).then(function (result) {
         if (result.error) {
             showError(result.error.message);
@@ -46,19 +50,18 @@ form.addEventListener('submit', function (ev) {
                 // TODO: There's a risk of the customer closing the window before callback execution. 
                 // Set up a webhook to listen for the payment_intent.succeeded event
                 const url = window.location.href;
-                let baseUrl = url.split('StripePayment')
-                baseUrl = baseUrl.[0];
-                let baseUrl = `${}/StripePayment/PaymentIntentSuccess`;
+                let baseUrl = `${url.split('StripePayment')[0]}StripePayment/PaymentIntentSuccess`;
                 const request = {
                     headers: {
-
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
                     },
-                    body: result.paymentIntent,
+                    body: JSON.stringify(result.paymentIntent),
                     method: "POST"
                 };
 
                 fetch(baseUrl, request).then(x => {
-
+                    window.location.replace(window.location.href);
                 }).catch(error=>console.log(error))
             } else {
                 showError("Error with payment processing")
